@@ -1,0 +1,25 @@
+<eq name="type" value="personal">
+    <dt class="expandinfo-dt">
+        {$field_name}：
+    </dt>
+
+    <dd class="expandinfo-dd">
+        <textarea class="form-control" onblur="check_textarea(this,{$field_id})" require="{$required}" min_length="{$validation.min}" max_length="{$validation.max}" text_type="textarea" id="expand_{$field_id}" name="expand_{$field_id}"style="min-height: 100px;">{$field_data|htmlspecialchars}</textarea>
+        <input type="hidden" class="canSubmit" id="canSubmit_{$field_id}" value="{$canSubmit}">
+        <neq name="input_tips" value=""><span class="input-tips">{$input_tips}</span></neq>
+    </dd>
+    <div class="expandinfo-error-info"><label id="label_{$field_id}"></label></div>
+    <else/>
+    <dt class="expandinfo-dt">
+        {$field_name}：
+    </dt>
+
+    <dd class="expandinfo-dd">
+        <if condition="($field_data neq null)&&($field_data neq '')">
+            {$field_data|htmlspecialchars}
+            <else/>
+            无
+        </if>
+    </dd>
+</eq>
+<div class="clearfix"></div>

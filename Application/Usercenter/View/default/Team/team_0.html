@@ -1,0 +1,95 @@
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>关于我们</title>
+<link rel="stylesheet" href="__STATIC__/us/style.css" type="text/css" media="screen">
+<!--[if lte IE 7]>
+    <link rel="stylesheet" href="__STATIC__/us/ie.css" type="text/css" media="screen" charset="utf-8" />
+<![endif]-->
+
+
+<script src="__STATIC__/jquery-1.10.2.min.js" type="text/javascript" charset="utf-8"></script>
+
+<script src="__STATIC__/us/jquery.cycle.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="__STATIC__/us/jquery.arctweets.js" type="text/javascript" charset="utf-8"></script>
+<script src="__STATIC__/us/core.js" type="text/javascript" charset="utf-8"></script>
+<script src="__STATIC__/us/jquery.label_over.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript" src="__STATIC__/us/comment-reply.js?ver=20090102"></script>
+<script type="text/javascript" src="__STATIC__/us/jquery.js?ver=1.7.1"></script>
+<script type="text/javascript">
+$(document).ready(function ($) {
+	tagFilters  = $("#tag-filter a");
+	tagFilters.removeClass("active");
+});
+</script>
+</head>
+<body id="team">
+<div id="page" style="min-height: 800px;">
+    <div class="wrap">
+    <div id="content" class="team">
+		<if condition="$info['my_url'] neq ''">
+     	   <p id="breadcrumbs"><a href="{$info.my_url}">回到首页</a></p> 
+		</if>       
+        <div id="tag-filter">
+            <img src="__STATIC__/us/join-us.jpg">
+             <ul>
+			 	<volist name="kind" id="vo">
+					<li><a id="{$vo.kindtime}" class="{$vo.kindtime} color{$i} active"><span>{$vo.kind}</span></a>&nbsp;&nbsp;&nbsp;</li>
+				</volist>
+            </ul>
+        </div>
+        <!-- End tag-filter -->
+
+        <ul id="employees">
+			<volist name="member" id="vo">
+					<li class="employee active" id="employee-{$i}">
+		                <div class="infoBubble" style="display: none;">
+		                    <div>
+		                        <h4>{$vo.name}</h4>
+		                    </div>
+		                </div>
+		                <div class="headshot">
+		                    <a href="../team/team-lv.html" >
+								<img src="__ROOT__{$vo.head|get_cover='path'}" width="83px" height="83px">
+							</a>
+		                </div>
+		                <ul class="employee-tags">
+						<?php
+							foreach($arr[$vo['id']] as $id){
+								$value = getKind($id);
+								$color = getColor($id);
+								?>
+								<li class="color<?php echo $color.' '; echo $value;?>"></li>
+								<?php
+							};
+						?>
+		                </ul>
+		            </li>
+			</volist>
+            </ul>
+        <hr>
+		
+    </div>
+		<hr>
+	<include file="Public/wap_footer"/>
+        </div>
+    </div>
+    <script type="text/javascript" src="jquery.form.js?ver=2.52"></script>
+	<script type="text/javascript" src="scripts.js?ver=3.0.2.1"></script>
+
+    <script type="text/javascript">
+
+      var _gaq = _gaq || [];
+        
+      _gaq.push(['_setAccount', 'UA-6585641-1']);
+      _gaq.push(['_trackPageview']);
+
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+
+    </script>
+</body>
+</html>

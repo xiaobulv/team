@@ -1,0 +1,26 @@
+<extend name="Public/usercenter"/>
+
+<block name="body">
+    <div class="row">
+        <div class="col-xs-12">
+            <p>&nbsp;</p>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-12">
+            <p>&nbsp;</p>
+        </div>
+        <div class="col-xs-6">
+            <a href="{:U('UserCenter/Team/lists')}">
+				<img class="avatar-img" src="__STATIC__/us/add.png"/>
+			</a>
+        </div>
+
+        <div class="col-xs-6">
+			<a href="{:U('UserCenter/Team/team',array('uid' => $uid))}" target="_blank">
+             <img class="avatar-img" src="__STATIC__/us/view.png"/>
+			</a>
+        </div>
+    </div>
+</block>

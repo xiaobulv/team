@@ -1,0 +1,128 @@
+<extend name="Base/team_1"/>
+
+<block name="style">
+    <link href="__STATIC__/us/people.css" rel="stylesheet" type="text/css"/>
+</block>
+
+<block name="body">
+    <style>
+	.none{
+		display:none;
+	}
+	.btn-ready {
+		color: #fff;
+		background-color: #3c9b67;
+		border-color: #2f7a51;
+	}
+	.margin15{
+		margin:10px;
+	}
+    </style>
+    <div class="app_head clearfix">
+		<if condition="$info.my_url neq ''">
+     	   <p id="breadcrumbs"><a href="{$info.my_url}">回到首页</a></p> 
+		</if>    
+        <div class="row">
+			<img src="__STATIC__/us/join-us.jpg" width="100%">
+            <div class="app_title col-md-12">
+					<a id="all" class="btn btn-primary">全部:</a>
+				<volist name="kind" id="vo">
+					<a id="{$vo.kindtime}" class="btn btn-primary margin15">{$vo.kind} </a>
+				</volist>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12 ">
+            <div class="row" id="member">
+                <volist name="member" id="vo">
+                    <div class="col-md-4 col-xs-6 member" style="min-height: 242px"  >
+                        <div class="row people-li boxShadow" style="overflow: hidden;">
+                            <div class="text-center">
+                                <a>
+                                    <img src="__ROOT__{$vo.head|get_cover='path'}" class="avatar-img" usay="{$vo.id}">
+                                </a>
+                                <br/> <br/>
+                                    <p class="text-center">
+                                        <a class="btn btn-primary" disabled="disabled">
+                                            {$vo.name}
+                                        </a>
+                                    </p>
+									<ul class="employee-tags none">
+									<?php
+										foreach($arr[$vo['id']] as $id){
+											$value = getKind($id);
+											$color = getColor($id);
+											?>
+											<li class="color <?php echo $color.' '; echo $value;?>"></li>
+											<?php
+										};
+									?>
+					                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                </volist>
+            </div>
+
+        </div>
+
+    </div>
+    <div class="pull-right">
+        {$lists.html}
+    </div>
+    <div>
+
+    </div>
+
+
+</block>
+
+<block name="script">
+    <script>
+        $(function () {
+            bindSupport();
+			usay();
+        })
+		
+		function usay() {
+	    $('[usay]').qtip({ // Grab some elements to apply the tooltip to
+	        suppress: true,
+	        content: {
+	            text: function (event, api) {
+	                var uid = $(this).attr('usay');
+	                $.get(U('UserCenter/Public/getContent'), {uid: uid}, function (member) {
+	                    var html = '<div ><p>' + member.introduction + '</p>';
+	                    var tpl = $(html);
+	                    api.set('content.text', tpl.html());
+
+	                }, 'json');
+	                return '获取数据中...'
+	            }
+
+	        }, position: {
+	            viewport: $(window)
+	        }, show: {solo: true}, style: {
+	            classes: 'qtip-bootstrap'
+
+	        }, hide: {
+	            event: 'unfocus'
+	        }
+	    })
+	}
+        // Tags Meta Filter
+        var member = $(".member"),
+            tagFilters  = $(".app_title a");
+       		tagFilters.click(function () {
+			tagFilters.removeClass('btn-ready');
+			$(this).addClass('btn-ready');
+			if(this.id == "all"){
+				member.removeClass('none');return;
+			}
+			member.removeClass('none').addClass('none');
+			member.find("."+this.id).parents(".member").removeClass('none');
+        });
+    </script>
+
+</block>

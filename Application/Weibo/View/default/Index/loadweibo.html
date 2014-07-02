@@ -1,0 +1,102 @@
+<script type="text/javascript" src="__STATIC__/oneplus/js/ext/magnific/jquery.magnific-popup.min.js"></script>
+<link type="text/css" rel="stylesheet" href="__STATIC__/oneplus/js/ext/magnific/magnific-popup.css"/>
+<volist name="list" id="weibo">
+
+    <div class="row" style="position: relative">
+        <eq name="weibo.is_top" value="1">
+            <div class="ribbion-green">
+                <a>置顶</a>
+            </div>
+        </eq>
+    </div>
+
+    <div class="row" id="weibo_{$weibo.id}">
+        <div class="col-xs-12">
+            <div class="pull-left">
+                <a href="{$weibo.user.space_url}" ucard="{$weibo.user.uid}">
+                    <img src="{$weibo.user.avatar64}"
+                         class="avatar-img"
+                         style="width: 64px;"/>
+                </a>
+            </div>
+
+            <div style="padding-left: 16px; width: 92%;float: left">
+                <p>
+                    <a ucard="{$weibo.user.uid}"
+                       href="{$weibo.user.space_url}">{$weibo.user.username|htmlspecialchars}
+                    </a>
+                    {$weibo.user.icons_html}
+                    <volist name="weibo['user']['rank_link']" id="vl">
+                        <if condition="$vl['is_show']">
+                            <img src="{$vl.logo_url}" title="{$vl.title}" alt="{$vl.title}"
+                                 class="rank_html"/>
+                        </if>
+                    </volist>
+                </p>
+                {$weibo.fetchContent}
+
+                <!--                <p class="word-wrap">{$weibo.content|parse_weibo_content}</p>
+                                <if condition="$weibo['type'] eq 'image'">
+                                    <div class="popup-gallery"  style="width: 550px;">
+                                <volist name="weibo['weibo_data']['image']" id="vo">
+                                        <a href="{$vo.big}" title="点击查看大图"><img src="{$vo.small}" width="100" height="100"></a>
+                                </volist>
+                </div>
+                </if>
+                            -->
+
+                <p>
+                    <!--"{:U('bboard/Index/tmldetail',array('topic_id'=>$vo['topic_id']))}"-->
+                    <span class="text-primary"><a href="{:U('Weibo/Index/weiboDetail',array('id'=>$weibo['id']))}">{$weibo.create_time|friendlyDate}</a> </span>
+                    <span class="pull-right text-primary weibo-comment-link" data-weibo-id="{$weibo.id}">
+                        <php>
+                            $weiboCommentTotalCount = $weibo['comment_count'];
+                        </php>
+                        <include file="_operation"/>
+                    </span>
+                </p>
+                <div class="row weibo-comment-list" style="display: none;" data-weibo-id="{$weibo.id}">
+                    <div class="col-xs-12">
+                        <div class="light-jumbotron" style="padding: 1em 2em;">
+                            <div class="weibo-comment-container">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <hr/>
+</volist>
+
+<script>
+    ucard();
+    bindSupport();
+
+
+    $(document).ready(function () {
+
+
+        $('.popup-gallery').each(function () { // the containers for all your galleries
+            $(this).magnificPopup({
+                delegate: 'a',
+                type: 'image',
+                tLoading: 'Loading image #%curr%...',
+                mainClass: 'mfp-img-mobile',
+                gallery: {
+                    enabled: true,
+                    navigateByImgClick: true,
+                    preload: [0, 1] // Will preload 0 - before current, and 1 after the current image
+                },
+                image: {
+                    tError: '<a href="%url%">The image #%curr%</a> could not be loaded.',
+                    titleSrc: function (item) {
+                        /*           return item.el.attr('title') + '<small>by Marsel Van Oosten</small>';*/
+                        return '';
+                    }
+                }
+            });
+        });
+    });
+</script>

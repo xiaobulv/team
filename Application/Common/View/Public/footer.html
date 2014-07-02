@@ -1,0 +1,45 @@
+<!-- 底部
+================================================== -->
+<p style="height: 10em;">&nbsp;</p>
+<div class="footer-jumbotron text-center">
+    <div class="row">
+        <div class="col-sm-4 col-xs-12">
+
+        </div>
+        <div class="col-sm-4 col-xs-12">
+            <p>本站由 <a  href="http://www.ourstu.com/" class="link-reverse">ThinkOX开源社交框架</a> 强力驱动
+
+                <!--//TODO 如未获得thinkox官方许可，请尽量保留一个指向thinkox的链接，非常感谢。-->
+            </p>
+
+           <php> $config = api('Config/lists');
+               C($config); //添加配置
+               $icp=C('WEB_SITE_ICP');
+           </php>
+            <notempty name="icp">
+                <p>备案号：<a href="http://www.miitbeian.gov.cn/" target="_blank">{$icp}</a></p>
+            </notempty>
+
+            <p>@2014 ThinkSkySoftware Studio. All Rights Reserved</p>
+        </div>
+        <div class="col-sm-4 col-xs-12">
+
+        </div>
+    </div>
+</div>
+<script type="text/javascript" src="__STATIC__/oneplus/js/ext/placeholder/placeholder.js"></script>
+        <script>
+            $(function(){
+                $('input,area').placeholder();
+            })
+        </script>
+<include file="Public/var"/>
+<block name="script">
+</block> <!-- 用于加载js代码 -->
+
+
+<!-- 页面footer钩子，一般用于加载插件JS文件和JS代码 -->
+{:hook('pageFooter', 'widget')}
+<div class="hidden"><!-- 用于加载统计代码等隐藏元素 -->
+    <block name="hidden"></block>
+</div>

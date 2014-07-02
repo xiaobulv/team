@@ -1,0 +1,22 @@
+<eq name="type" value="personal">
+    <dt class="expandinfo-dt">
+        {$field_name}：
+    </dt>
+    <dd class="expandinfo-dd">
+        <select class="form-control" name="expand_{$field_id}">
+            <volist name="items" id="vl">
+                <option value="{$vl.value}" {$vl.selected}>{$vl.value|htmlspecialchars}</option>
+            </volist>
+        </select>
+        <div class="clearfix"></div>
+        <neq name="input_tips" value=""><span class="input-tips">{$input_tips}</span></neq>
+    </dd>
+    <else/>
+    <dt class="expandinfo-dt">
+        {$field_name}：
+    </dt>
+    <dd class="expandinfo-dd">
+        {$selected|htmlspecialchars}
+    </dd>
+</eq>
+<div class="clearfix"></div>

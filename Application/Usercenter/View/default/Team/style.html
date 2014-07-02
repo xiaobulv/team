@@ -1,0 +1,30 @@
+<extend name="Public/usercenter"/>
+
+<block name="body">
+    <div class="row">
+        <div class="col-xs-12">
+            <p>&nbsp;</p>
+            <h4>修改风格</h4>
+            <hr class="oneuser-title-hr"/>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-6">
+            <form id="style" action="{:U('UserCenter/Team/style')}" method="post" class="ajax-form">
+				<select name="team_style">
+						<option value="team_0" <if condition ="$info['style'] eq 'team_0'">selected="selected"</if>">小头像风格</option>
+						<option value="team_1" <if condition ="$info['style'] eq 'team_0'">selected="selected"</if>>大头像风格</option>
+				</select>
+				<br />
+				<br />
+				微博(需要http://)：<input type="text" value="{$info.weibo}" name="weibo" class="form-control"/><br />
+				网站(需要http://)：<input type="text" value="{$info.my_url}" name="my_url" class="form-control"/>
+				<br />
+                <input type="submit" class="btn btn-primary" value="修改"/>
+                <a  class="btn btn-primary" target="_blank" href="{:U('UserCenter/Team/team',array('uid' =>$uid))}">预览</a>
+                <p>&nbsp;</p>
+            </form>
+        </div>
+    </div>
+</block>
